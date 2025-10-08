@@ -1,4 +1,4 @@
-# 🖥️ Active Directory Project: by Fuad Eniola Oyeshile
+# 🖥️ Active Directory: A look into Active Directory Enviroments, Group Policy Objects, and System Administration
 
 
 ## 📘 Overview
