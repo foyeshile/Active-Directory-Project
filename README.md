@@ -35,107 +35,107 @@ When creating this Active Directory setup, I had to figure out a cost-effective 
 
 Keeping allocations and naming simple, I prepared the VM with _**Windows Server 2022 (64-bit)**_ and 50GB of allocation size, to make sure that the server had ample space to function correctly.
 
-![Virtual Machine Setup](images/vm-setup.png)
+<img src="images/vm-setup.png" alt="Virtual Machine Setup" width="750"/>
 
 After, I confirmed the Windows 2022 Server was configured correctly to the created VM through my storage settings.
 
-![Server Storage Configuration](images/server-storage-config.png)
+<img src="images/server-storage-config.png" alt="Server Storage Configuration" width="650"/>
 
 Finally, I was able to confirm that my VM was working and reading the .iso correctly.
 
-![Windows Installation Confirmation](images/windows-installation.png)
+<img src="images/windows-installation.png" alt="Windows Installation Confirmation" width="750"/>
 
 Specifically for setting up this homelab, I focused on using the _**Windows Server 2022 Standard Evaluation (Desktop Experience)**_ because this instance is being used as a homelab / testing enviroment. There is the option to use the _**Windows Server 2022 Datacenter Evaluation (Desktop Experience)**_ for more features and accessibility, but it was not needed for this project.
 
-![Windows Version Selection](images/windows-version-selection.png)
+<img src="images/windows-version-selection.png" alt="Windows Version Selection" width="750"/>
 
 After installing the Microsoft Server Operating System, I continued to create an Administrator account, and proceeded to get to the login screen successfully. Once logged in, I could confirm that the Server Manager was present and available.
 
-![Server Manager Confirmation](images/server-manager-confirmation.png)
+<img src="images/server-manager-confirmation.png" alt="Server Manager Confirmation" width="750"/>
 
 After the Server Manager was confirmed, I began to get started with creating an Active Directory Domain Controller. By starting with renaming the instance PC, I would then save the changes to restart and continue to create the controller.
 
-![Rename Server](images/rename-server.png)
+<img src="images/rename-server.png" alt="Rename Server" width="650"/>
 
 Post-restart, I proceeded to add Roles and Features...
 
-![Add Roles and Features](images/add-roles.png)
+<img src="images/add-roles.png" alt="Add Roles and Features" width="750"/>
 
 ...and selected _**Role-based or feature based installation**_ > Select the renamed Server VM (WindowsVM in this circumstance) > Select Active Directory Domain Services > Click "Next" on Features > Click "Next" on AD DS > Enable _**Restart the Destination Server Automatically If Required**_ > Proceed to install.
 
 Once the install is finished, the server must be promoted to a domain controller:
 
-![Promote to Domain Controller](images/promote-domain-controller.png)
+<img src="images/promote-domain-controller.png" alt="Promote to Domain Controller" width="750"/>
 
 After clicking, I selected _**Add A New Forest**_ and created a passowrd for the forest as well.
 
-![Add New Forest](images/add-new-forest.png)
+<img src="images/add-new-forest.png" alt="Add New Forest" width="650"/>
 
 After this, I continued to the Additional Options of the configuration, and verified that the NetBIOS name was automatically created (by default the name should be populated, but can be changed).
 
-![NetBIOS Check](images/netbios-check.png)
+<img src="images/netbios-check.png" alt="NetBIOS Check" width="600"/>
 
 Once finished, I proceeded to the **_Prerequisites Check_** to confirm that the checks were passed successfully. The check confirmed that everything was correct, and I proceeded with the installation.
 
-![Prerequisites Check](images/prerequisites-check.png)
+<img src="images/prerequisites-check.png" alt="Prerequisites Check" width="600"/>
 
 The server had to be restarted, and once done, I could successfully login to the server again.
 
-![Successful Login](images/successful-login.png)
+<img src="images/successful-login.png" alt="Successful Login" width="650"/>
 
 ### 2. User & Group Management
 
 From here, the Active Directory Domain Controller has been successfully created; I then wanted to create users that could be managed through network computers. This step primarily confirms that users are able to log into the ADDC, and can be created through the _**Active Directory Users and Computers Tool**_ for creating groups, users, etc.
 
-![Active Directory Users and Computers Dashboard](images/aduc-dashboard.png)
+<img src="images/aduc-dashboard.png" alt="Active Directory Users and Computers Dashboard" width="750"/>
 
 Through the tool, I was able to create a new user by right-clicking _**Users**_ > New > User.
 
-![Create User](images/create-user.png)
+<img src="images/create-user.png" alt="Create User" width="650"/>
 
 As a test, I created an IT Support user login to test the newly created user, set up a password for the account, verified the information, and continued.
 
-![IT Support User Creation](images/it-support-user.png)
+<img src="images/it-support-user.png" alt="IT Support User Creation" width="600"/>
 
 Once this was confirmed, I deleted the previous user, then created different _**Organizational Units**_ to specify users and what groups they belonged to. In this circumstance, I made an IT, Sales, and HR group. In those groups, I made users to replicate a distribution of users.
 
-![Organizational Unit Creation](images/ou-creation.png)
+<img src="images/ou-creation.png" alt="Organizational Unit Creation" width="750"/>
 
 Each Group had a user that was dedicated to a task (IT, Sales, HR) and would proceed to be the test units for the rest of this project. Proceeding with this, I decided to make _**Security Groups**_ for these Organizational Units. This option is necessary in order to change Read/Write/Modify options, and can be configured to groups that may need / not need the access to certain permissions. IT Support will have _**Full Control**_, HR will have _**Modify(or Change)**_, and Sales will have _**Read Only**_ permissions.
 To start, these Groups can be created by **Right-clicking the Organizational Unit > New > Group**.
 
-![Security Group Creation](images/security-group-creation.png)
+<img src="images/security-group-creation.png" alt="Security Group Creation" width="650"/>
 
 The Group Scope is set to **Global**, and the Group Type is set to **Security**. The scope and type can vary depending on the type of group that needs to be made. Once the group is made, the users can be added towards the group by selecting **Members > Add.**
 
-![Add Group Members](images/add-group-members.png)
+<img src="images/add-group-members.png" alt="Add Group Members" width="650"/>
 
 The username of the account needed must be added to the "Object Names to Select" box; once entered, click **Check Names** to auto-populate the box with the user account, and click **OK**, then **Apply**.
 
-<img width="1018" height="765" alt="image" src="https://github.com/user-attachments/assets/d52cccfb-e7fe-400e-bb81-ded676799a09" />
+<img src="images/username-check.png" alt="Username Check" width="650"/>
 
 The Security Groups have been successfuly created. I then decided to create _**Group Permissions**_ for given reseources. This can be done in a couple different ways, but for this project, I decided to create it through the GUI. To begin, I navigated to the **C Drive Main Directory**, and created starting folders for each of the groups that were created. I made a main folder titled **Deparment Shares**, and within that folder, created three seperate folders: **HR, IT, and Sales**.
 
-![Department Shares Folder Setup](images/department-shares.png)
+<img src="images/department-shares.png" alt="Department Shares Folder Setup" width="600"/>
 
 Each folder needed to be configured to have permissions towards acess: I did so by **Right-clicking the folder > Properties > Sharing > Advanced Sharing.** I enabled **"Share this folder"** and named it correspondingly: **ITShare for IT, HRShare for HR, and SalesShare for Sales.**
 
-![Folder Share Permissions](images/share-permissions.png)
+<img src="images/share-permissions.png" alt="Folder Share Permissions" width="600"/>
 
 Once done, select **Permissions** and remove the **"Everyone"** group. This will be replaced for the corresponding group that needs access, and once replaced, will look as such: 
 
-![HR Folder Permissions](images/hr-permissions.png)
+<img src="images/hr-permissions.png" alt="HR Folder Permissions" width="600"/>
 
 In this circumstance, HR will have **Change and Read** controls. This will be repeated for the other two folders as well, and correspond to what permissions are needed with files in them. After that is done, I made sure to change the permissions within the **Security** tab.
 
-![NTFS Security Configuration](images/ntfs-security.png)
+<img src="images/ntfs-security.png" alt="NTFS Security Configuration" width="600"/>
 
 **HR-Team** had to be added towards the Groups, and then given the same permissions for the files. After confirming, I did the same for the remaining two groups, **IT and Sales.** After confirming the permissions, I then proceeded to move onto **Group Policy and Implementation.**
 
 ### 3. Group Policy Implementation
 For Group Policy, I know that the system needed some form of administration over computer settings (i.e. screen locking, password restrictions, etc.) to be used across the existing domain for the example corporation. Creating the group policy is similar to how one could use tools to create users and the like from the Domain Controller, but in a different tab. I was able to access it from the Server Manager by going to _**Tools > Group Policy Management**_.
 
-![Group Policy Management](images/group-policy-management.png)
+<img src="images/group-policy-management.png" alt="Group Policy Management" width="750"/>
 
 Once there, I navigated to the **Corporation.local** tab, fully expanded the tab and navigated to Group Policy Objects. Once there, I had to create a new policy, with three of them being focused on different aspects:
 
@@ -143,7 +143,7 @@ Once there, I navigated to the **Corporation.local** tab, fully expanded the tab
 - Screen Lock Policy
 - Drive Mapping - Department Shares
 
-![Group Policy Object List](images/gpo-list.png)
+<img src="images/gpo-list.png" alt="Group Policy Object List" width="650"/>
 
 Editing these policies are navigated by **Right-Clicking the created policy > Edit > Navigate toward the specific location that your policy is based in**: 
 
@@ -153,7 +153,7 @@ Editing these policies are navigated by **Right-Clicking the created policy > Ed
 
 For **Password Policy**, I went for specific secure standards, changing some of the policies to standard-known, and others to own preference:
 
-![Password Policy Settings](images/password-policy.png)
+<img src="images/password-policy.png" alt="Password Policy Settings" width="600"/>
 
 - Minimum password length: 10
 - Password must meet complexity requirements: Enabled
@@ -162,15 +162,15 @@ For **Password Policy**, I went for specific secure standards, changing some of 
 
 For **Screen Lock Policy**, I changed the active timeout for a screensaver to **600 seconds**, and to **lock the screen with password** when the timeout occurs.
 
-![Screen Lock Policy](images/screen-lock-policy.png)
+<img src="images/screen-lock-policy.png" alt="Screen Lock Policy" width="600"/>
 
 It is important to note that _**the Group Policy Object has to be linked towards the Organizational Unit**_ in order to take effect. This can be done by dragging the policy directly to the Oganizational Unit that is requested. You will then be met with a confirmation- select **Yes** to confirm it.  
 
-![Link Group Policy to OU](images/link-gpo.png)
+<img src="images/link-gpo.png" alt="Link Group Policy to OU" width="650"/>
 
 Finally, I wanted to create one more policy for **C Drive Mapping** for the shared folders. I navigated towards the location for the policy for Drive Mapping, and then proceeded to create a new mapping that would coordinate with the given Organizational Units: _**I: for IT, H: for HR, S: for Sales**_.
 
-![Drive Mapping Configuration](images/drive-mapping.png)
+<img src="images/drive-mapping.png" alt="Drive Mapping Configuration" width="650"/>
 
 There are a couple of things that I had to configure to make sure the drive was connected:
 - **Location** would be set as the location of the shared folder for the drive that you want to re-organize, in this case, it was the **_ITShare_** folder.
@@ -178,16 +178,16 @@ There are a couple of things that I had to configure to make sure the drive was 
 - The **Drive Letter** had to be assigned as I had planned out before
 - I had to make sure that the users in the enabled group got the correct drive, by navigating to **Common > Enabling Item-level targeting > Selecting "Targeting..." > adding the Security Group for the specific drive (in this case, IT-Support).**
 
-![Item-Level Targeting](images/item-level-targeting.png)
+<img src="images/item-level-targeting.png" alt="Item-Level Targeting" width="600"/>
 
 
 This same scenario must be done for each of the drives, and when finished, will look like so:
 
-![Completed Drive Mapping Policies](images/drive-map-complete.png)
+<img src="images/drive-map-complete.png" alt="Completed Drive Mapping Policies" width="650"/>
 
 Aftet this was all done, I confirmed that each one of the Organizational Units had the policies instilled on each other:
 
-![Final OU and Policy Overview](images/final-ou-view.png)
+<img src="images/final-ou-view.png" alt="Final OU and Policy Overview" width="750"/>
 
 So as seen, each one of the OU's contains:
 - A **Screen Lock Policy** to confirm that the screen times out after a specified amount of time, and locks
